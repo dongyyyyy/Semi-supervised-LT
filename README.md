@@ -57,54 +57,6 @@ nvcc --version
 cat /usr/local/cuda/include/cudnn_version.h | grep CUDNN_MAJOR -A 2
 ```
 
-## Args 설명
-
-## 실행 방법
-### fixmatch (cifar10)
-```
- nohup python main.py --training-method fixmatch --optim Adam --epoch 500 --val-iteration 500 --seed 0 --dataset cifar10 --num_max 1000 --label_ratio=20 --imb_ratio 100 --gpu 3 > fixmatch_cifar10.out &
-```
-### fixmatch (cifar100)
-```
- nohup python main.py --training-method fixmatch --optim Adam --epoch 500 --val-iteration 500 --seed 0 --dataset cifar100 --num_max 200 --label_ratio=40 --imb_ratio 20 --gpu 0 --imbalancetype long > fixmatch_cifar100_4.out &
-```
-fixmatch+ABC
-### fixmatch+ABC (cifar10)
-```
- nohup python main.py --training-method fixmatchABC --optim Adam --epoch 500 --val-iteration 500 --seed 0 --dataset cifar10 --num_max 1000 --label_ratio=20 --imb_ratio 100 --gpu 3 > ./log/fixmatchABC.out &
-```
-### fixmatch+ABC (cifar100)
-```
- nohup python main.py --training-method fixmatchABC --optim SGD --epoch 500 --val-iteration 500 --seed 0 --dataset cifar100 --num_max 200 --label_ratio=40 --imb_ratio 20 --imbalancetype step --gpu 1 > fixmatchABC_cifar100_1.out &
-```
-
-### fixmatch+DARP (cifar10)
-```
-nohup python main.py --training-method fixmatchDARP --optim SGD --epoch 500 --val-iteration 500 --seed 0  --dataset cifar10 --num_max 1000 --label_ratio 20 --imb_ratio 100 --gpu 3 --imbalancetype long --darp --est --alpha 2 --warm 200 > fixmatchDARP_cifar10.out &
-```
-
-### fixmatch+DARP (cifar100)
-```
-nohup python main.py --training-method fixmatchDARP  --epoch 500 --val-iteration 500 --seed 0  --dataset cifar100 --num_max 200 --label_ratio 40 --imb_ratio 20 --gpu 3 --imbalancetype step --darp --est --alpha 2 --warm 200 > fixmatchDARP_cifar100_1.out &
-```
-
-```
-nohup python main.py --training-method fixmatchCCSSL  --epoch 500 --val-iteration 500 --seed 2 --dataset cifar10 --num_max 1000 --label_ratio 20 --imb_ratio 100 --gpu 0 --imbalancetype long --low_dim 64 --contrast_with_softlabel True --lambda_contrast 1. --contrastive_left_out False --contrastive_with_thresh 0.9 --temperature 0.07 --DA False > fixmatchCCSSL_cifar10_1.out &
-```
-### fixmatch+CCSSL (cifar100)
-```
-nohup python main.py --training-method fixmatchCCSSL  --epoch 500 --val-iteration 500 --seed 0  --dataset cifar100 --num_max 200 --label_ratio 40 --imb_ratio 20 --gpu 3 --imbalancetype step --low_dim 64 --contrast_with_softlabel True --lambda_contrast 1. --contrastive_left_out False --contrastive_with_thresh 0.9 --temperature 0.07 --DA False > fixmatchCCSSL_cifar100_3.out &
-```
-
-
-
-nohup python main.py --training-method fixmatch --optim SGD --epoch 500 --val-iteration 500 --seed 0 --dataset cifar100 --num_max 200 --label_ratio=40 --imb_ratio 20 --gpu 0 --imbalancetype step --train-strong True > fixmatch_cifar100.out &
-
-nohup python main.py --training-method fixmatchABC --optim SGD --epoch 500 --val-iteration 500 --seed 0 --dataset cifar100 --num_max 200 --label_ratio=40 --imb_ratio 20 --imbalancetype step --gpu 1 --train-strong True > fixmatchABC_cifar100.out &
-
-nohup python main.py --training-method fixmatchDARP  --optim SGD --epoch 500 --val-iteration 500 --seed 0  --dataset cifar100 --num_max 200 --label_ratio 40 --imb_ratio 20 --gpu 3 --imbalancetype step --darp --est --alpha 2 --warm 200 --train-strong True > fixmatchDARP_cifar100.out &
-
-
 ### fixmatch + ABC + proposed-1 (cifar10)
 ```
 python main.py --training-method train_fixmatch_withABC_contrastive_labeled  --epoch 500 --val-iteration 500 --seed 0 --dataset cifar10 --num_max 1000 --label_ratio 20 --imb_ratio 100 --gpu 0 --imbalancetype long --low-dim 64 --temperature 0.07 --DA False --using-mask True --selfcon-pos False,False --contrastive-supervised True --lr 0.002 --singleView False1 --train-strong True --lambda-Scontrast .1 --mu 1 --contrastive-unlabeled supervised --contrastive-labeled supervised --eval ema
